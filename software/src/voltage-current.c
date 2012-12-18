@@ -133,7 +133,11 @@ void destructor(void) {
 void tick(const uint8_t tick_type) {
     if(!(BC->pin_alert->pio->PIO_PDSR & BC->pin_alert->mask)) {
     	if(BA->mutex_take(*BA->mutex_twi_bricklet, 10)) {
-    		BC->value[SIMPLE_UNIT_CURRENT] = ina226_read_register(INA226_REG_CURRENT)*BC->gain_muldiv[0]/BC->gain_muldiv[1];
+    		if(BC->gain_muldiv[1] != 0) {
+    			BC->value[SIMPLE_UNIT_CURRENT] = ina226_read_register(INA226_REG_CURRENT)*BC->gain_muldiv[0]/BC->gain_muldiv[1];
+    		} else {
+    			BC->value[SIMPLE_UNIT_CURRENT] = ina226_read_register(INA226_REG_CURRENT);
+    		}
     		BC->value[SIMPLE_UNIT_VOLTAGE] = ina226_read_register(INA226_REG_BUS_VOLTAGE)*5/4;
 
     		// clear alert pin
@@ -251,9 +255,9 @@ void get_configuration(const ComType com, const GetConfiguration *data) {
 
 	gcr.header                  = data->header;
 	gcr.header.length           = sizeof(GetConfigurationReturn);
-	gcr.averaging               = BC->averaging;
-	gcr.current_conversion_time = BC->current_conversion_time;
-	gcr.voltage_conversion_time = BC->voltage_conversion_time;
+	gcr.averaging               = MIN(BC->averaging, 7);
+	gcr.current_conversion_time = MIN(BC->current_conversion_time, 7);
+	gcr.voltage_conversion_time = MIN(BC->voltage_conversion_time, 7);
 
 	BA->send_blocking_with_timeout(&gcr,
 	                               sizeof(GetConfigurationReturn),
