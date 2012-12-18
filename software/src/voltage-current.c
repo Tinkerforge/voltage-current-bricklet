@@ -69,8 +69,8 @@ const SimpleUnitProperty sup[] = {
 
 const uint8_t smp_length = sizeof(smp);
 
-void invocation(uint8_t com, uint8_t *data) {
-	switch(((StandardMessage*)data)->type) {
+void invocation(const ComType com, const uint8_t *data) {
+	switch(((StandardMessage*)data)->header.fid) {
 		case FID_SET_CONFIGURATION: {
 			set_configuration(com, (SetConfiguration*)data);
 			return;
@@ -95,6 +95,10 @@ void invocation(uint8_t com, uint8_t *data) {
 			simple_invocation(com, data);
 			break;
 		}
+	}
+
+	if(((StandardMessage*)data)->header.fid > FID_LAST) {
+		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
 	}
 }
 
@@ -238,14 +242,15 @@ void set_configuration(const ComType com, const SetConfiguration *data) {
 	BC->voltage_conversion_time = data->voltage_conversion_time;
 
 	ina226_configure();
+
+	BA->com_return_setter(com, data);
 }
 
 void get_configuration(const ComType com, const GetConfiguration *data) {
 	GetConfigurationReturn gcr;
 
-	gcr.stack_id                = data->stack_id;
-	gcr.type                    = data->type;
-	gcr.length                  = sizeof(GetConfigurationReturn);
+	gcr.header                  = data->header;
+	gcr.header.length           = sizeof(GetConfigurationReturn);
 	gcr.averaging               = BC->averaging;
 	gcr.current_conversion_time = BC->current_conversion_time;
 	gcr.voltage_conversion_time = BC->voltage_conversion_time;
@@ -258,14 +263,15 @@ void get_configuration(const ComType com, const GetConfiguration *data) {
 void set_calibration(const ComType com, const SetCalibration *data) {
 	BC->gain_muldiv[0]  = data->gain_multiplier;
 	BC->gain_muldiv[1]  = data->gain_divisor;
+
+	BA->com_return_setter(com, data);
 }
 
 void get_calibration(const ComType com, const GetCalibration *data) {
 	GetCalibrationReturn gcr;
 
-	gcr.stack_id        = data->stack_id;
-	gcr.type            = data->type;
-	gcr.length          = sizeof(GetCalibrationReturn);
+	gcr.header          = data->header;
+	gcr.header.length   = sizeof(GetCalibrationReturn);
 	gcr.gain_multiplier = BC->gain_muldiv[0];
 	gcr.gain_divisor    = BC->gain_muldiv[1];
 

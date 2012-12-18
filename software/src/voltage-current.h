@@ -57,55 +57,41 @@
 #define FID_LAST 27
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t averaging;
 	uint8_t voltage_conversion_time;
 	uint8_t current_conversion_time;
 } __attribute__((__packed__)) SetConfiguration;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) GetConfiguration;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint8_t averaging;
 	uint8_t voltage_conversion_time;
 	uint8_t current_conversion_time;
 } __attribute__((__packed__)) GetConfigurationReturn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint16_t gain_multiplier;
 	uint16_t gain_divisor;
 } __attribute__((__packed__)) SetCalibration;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) GetCalibration;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 	uint16_t gain_multiplier;
 	uint16_t gain_divisor;
 } __attribute__((__packed__)) GetCalibrationReturn;
 
 typedef struct {
-	uint8_t stack_id;
-	uint8_t type;
-	uint16_t length;
+	MessageHeader header;
 } __attribute__((__packed__)) StandardMessage;
 
 void set_configuration(const ComType com, const SetConfiguration *data);
@@ -157,7 +143,7 @@ void ina226_configure(void);
 int16_t ina226_read_register(const uint8_t reg);
 void ina226_write_register(const uint8_t reg, const uint16_t value);
 
-void invocation(uint8_t com, uint8_t *data);
+void invocation(const ComType com, const uint8_t *data);
 void constructor(void);
 void destructor(void);
 void tick(const uint8_t tick_type);
