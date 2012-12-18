@@ -253,8 +253,14 @@ void set_configuration(const ComType com, const SetConfiguration *data) {
 void get_configuration(const ComType com, const GetConfiguration *data) {
 	GetConfigurationReturn gcr;
 
+<<<<<<< HEAD
 	gcr.header                  = data->header;
 	gcr.header.length           = sizeof(GetConfigurationReturn);
+=======
+	gcr.stack_id                = data->stack_id;
+	gcr.type                    = data->type;
+	gcr.length                  = sizeof(GetConfigurationReturn);
+>>>>>>> 97335ae... Add sanity checks for calibration and configuration
 	gcr.averaging               = MIN(BC->averaging, 7);
 	gcr.current_conversion_time = MIN(BC->current_conversion_time, 7);
 	gcr.voltage_conversion_time = MIN(BC->voltage_conversion_time, 7);
