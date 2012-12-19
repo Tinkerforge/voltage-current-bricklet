@@ -113,6 +113,11 @@ void get_configuration(const ComType com, const GetConfiguration *data);
 void set_calibration(const ComType com, const SetCalibration *data);
 void get_calibration(const ComType com, const GetCalibration *data);
 
+#define CURRENT_40OHM_MUL 625
+#define CURRENT_40OHM_DIV 1024
+#define VOLTAGE_MUL 5
+#define VOLTAGE_DIV 4
+
 #define CALIBRATION_EEPROM_POSITION (BRICKLET_PLUGIN_MAX_SIZE + 96)
 
 #define INA226_REG_CONFIGURATION 0x00

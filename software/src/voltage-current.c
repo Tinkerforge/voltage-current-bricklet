@@ -130,11 +130,11 @@ void tick(const uint8_t tick_type) {
     if(!(BC->pin_alert->pio->PIO_PDSR & BC->pin_alert->mask)) {
     	if(BA->mutex_take(*BA->mutex_twi_bricklet, 10)) {
     		if(BC->gain_muldiv[1] != 0) {
-    			BC->value[SIMPLE_UNIT_CURRENT] = ina226_read_register(INA226_REG_CURRENT)*BC->gain_muldiv[0]/BC->gain_muldiv[1];
+    			BC->value[SIMPLE_UNIT_CURRENT] = (ina226_read_register(INA226_REG_CURRENT)*CURRENT_40OHM_MUL/CURRENT_40OHM_DIV)*BC->gain_muldiv[0]/BC->gain_muldiv[1];
     		} else {
     			BC->value[SIMPLE_UNIT_CURRENT] = ina226_read_register(INA226_REG_CURRENT);
     		}
-    		BC->value[SIMPLE_UNIT_VOLTAGE] = ina226_read_register(INA226_REG_BUS_VOLTAGE)*5/4;
+    		BC->value[SIMPLE_UNIT_VOLTAGE] = ina226_read_register(INA226_REG_BUS_VOLTAGE)*VOLTAGE_MUL/VOLTAGE_DIV;
 
     		// clear alert pin
     		ina226_read_mask();
