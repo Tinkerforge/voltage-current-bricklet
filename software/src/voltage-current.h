@@ -99,8 +99,8 @@ void get_configuration(const ComType com, const GetConfiguration *data);
 void set_calibration(const ComType com, const SetCalibration *data);
 void get_calibration(const ComType com, const GetCalibration *data);
 
-#define CURRENT_40OHM_MUL 625
-#define CURRENT_40OHM_DIV 1024
+#define CURRENT_40OHM_MUL 5
+#define CURRENT_40OHM_DIV 8
 #define VOLTAGE_MUL 5
 #define VOLTAGE_DIV 4
 

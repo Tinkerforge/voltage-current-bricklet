@@ -145,7 +145,6 @@ void tick(const uint8_t tick_type) {
     		BA->mutex_give(*BA->mutex_twi_bricklet);
 
     		BC->value[SIMPLE_UNIT_POWER]   = BC->value[SIMPLE_UNIT_CURRENT]*BC->value[SIMPLE_UNIT_VOLTAGE]/1000;
-    		BA->printf("current: %d | voltage: %d | power: %d\n\r", BC->value[SIMPLE_UNIT_CURRENT], BC->value[SIMPLE_UNIT_VOLTAGE], BC->value[SIMPLE_UNIT_POWER]);
     	}
     }
 
@@ -156,8 +155,8 @@ void eeprom_read_calibration(void) {
 	BA->bricklet_select(BS->port - 'a');
 	BA->i2c_eeprom_master_read(BA->twid->pTwi,
 	                           CALIBRATION_EEPROM_POSITION,
-							   (char *)BC->gain_muldiv,
-							   4);
+	                           (char *)BC->gain_muldiv,
+	                            4);
 	BA->bricklet_deselect(BS->port - 'a');
 }
 
@@ -165,8 +164,8 @@ void eeprom_write_calibration(void) {
 	BA->bricklet_select(BS->port - 'a');
 	BA->i2c_eeprom_master_write(BA->twid->pTwi,
 	                            CALIBRATION_EEPROM_POSITION,
-							    (char *)BC->gain_muldiv,
-							    4);
+	                            (char *)BC->gain_muldiv,
+	                            4);
 	BA->bricklet_deselect(BS->port - 'a');
 	if(BC->gain_muldiv[0] == 0 || BC->gain_muldiv[1] == 0) {
 		BC->gain_muldiv[0] = 1;
@@ -236,8 +235,6 @@ void ina226_write_register(const uint8_t reg, const uint16_t value) {
 	               NULL);
 
 	BA->bricklet_deselect(port);
-
-	BA->printf("write value: %d\n\r", value);
 }
 
 void set_configuration(const ComType com, const SetConfiguration *data) {
@@ -253,14 +250,8 @@ void set_configuration(const ComType com, const SetConfiguration *data) {
 void get_configuration(const ComType com, const GetConfiguration *data) {
 	GetConfigurationReturn gcr;
 
-<<<<<<< HEAD
 	gcr.header                  = data->header;
 	gcr.header.length           = sizeof(GetConfigurationReturn);
-=======
-	gcr.stack_id                = data->stack_id;
-	gcr.type                    = data->type;
-	gcr.length                  = sizeof(GetConfigurationReturn);
->>>>>>> 97335ae... Add sanity checks for calibration and configuration
 	gcr.averaging               = MIN(BC->averaging, 7);
 	gcr.current_conversion_time = MIN(BC->current_conversion_time, 7);
 	gcr.voltage_conversion_time = MIN(BC->voltage_conversion_time, 7);
@@ -274,6 +265,7 @@ void set_calibration(const ComType com, const SetCalibration *data) {
 	BC->gain_muldiv[0]  = data->gain_multiplier;
 	BC->gain_muldiv[1]  = data->gain_divisor;
 
+	eeprom_write_calibration();
 	BA->com_return_setter(com, data);
 }
 
