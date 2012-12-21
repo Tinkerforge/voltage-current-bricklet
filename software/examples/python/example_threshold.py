@@ -13,11 +13,12 @@ def cb_reached(current):
     print('Current is greater than 1A: ' + str(current/1000.0))
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create ip connection to brickd
+    ipcon = IPConnection() # Create IP connection
+    vc = VoltageCurrent(UID, ipcon) # Create device object
 
-    vc = VoltageCurrent(UID) # Create device object
-    ipcon.add_device(vc) # Add device to ip connection
-    # Don't use device before it is added to a connection
+    ipcon.connect(HOST, PORT) # Connect to brickd
+    # Don't use device before ipcon is connected
+
 
     # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
     vc.set_debounce_period(10000)
@@ -29,4 +30,3 @@ if __name__ == "__main__":
     vc.set_current_callback_threshold('>', 1*1000, 0)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
-    ipcon.destroy()

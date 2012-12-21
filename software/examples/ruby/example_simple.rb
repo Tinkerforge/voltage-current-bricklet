@@ -10,10 +10,11 @@ HOST = 'localhost'
 PORT = 4223
 UID = 'ABC' # Change to your UID
 
-ipcon = IPConnection.new HOST, PORT # Create IP connection to brickd
-vc = BrickletVoltageCurrent.new UID # Create device object
-ipcon.add_device vc # Add device to IP connection
-# Don't use device before it is added to a connection
+ipcon = IPConnection.new # Create IP connection
+vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
+
+ipcon.connect HOST, PORT # Connect to brickd
+# Don't use device before ipcon is connected
 
 # Get current current and voltage (unit is mA and mV)
 current = vc.get_current / 1000.0
@@ -23,4 +24,3 @@ puts "Voltage: #{voltage} V"
 
 puts 'Press key to exit'
 $stdin.gets
-ipcon.destroy

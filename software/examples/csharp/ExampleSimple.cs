@@ -8,11 +8,11 @@ class Example
 
 	static void Main() 
 	{
-		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
-		BrickletVoltageCurrent vc = new BrickletVoltageCurrent(UID); // Create device object
-		ipcon.AddDevice(vc); // Add device to ip connection
-		// Don't use device before it is added to a connection
+		IPConnection ipcon = new IPConnection(); // Create IP connection
+		BrickletVoltageCurrent vc = new BrickletVoltageCurrent(UID, ipcon); // Create device object
 
+		ipcon.Connect(HOST, PORT); // Connect to brickd
+		// Don't use device before ipcon is connected
 
 		// Get current current and voltage (unit is mA and mV)
 		int current = vc.GetCurrent();
@@ -21,7 +21,7 @@ class Example
 		System.Console.WriteLine("Current: " + current/1000.0 + " A");
 		System.Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
 
-		System.Console.WriteLine("Press ctrl+c to exit");
-		ipcon.JoinThread();
+		System.Console.WriteLine("Press key to exit");
+		System.Console.ReadKey();
     }
 }

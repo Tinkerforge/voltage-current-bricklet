@@ -10,11 +10,11 @@ $host = 'localhost';
 $port = 4223;
 $uid = 'ABC'; // Change to your UID
 
-$ipcon = new IPConnection($host, $port); // Create IP connection to brickd
-$vc = new BrickletVoltageCurrent($uid); // Create device object
+$ipcon = new IPConnection(); // Create IP connection
+$vc = new BrickletVoltageCurrent($uid, $ipcon); // Create device object
 
-$ipcon->addDevice($vc); // Add device to IP connection
-// Don't use device before it is added to a connection
+$ipcon->connect($host, $port); // Connect to brickd
+// Don't use device before ipcon is connected
 
 // Get current current and voltage (unit is mA and mV)
 $current = $vc->getCurrent() / 1000.0;

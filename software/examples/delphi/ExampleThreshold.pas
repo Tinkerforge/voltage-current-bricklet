@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     vc: TBrickletVoltageCurrent;
   public
-    procedure ReachedCB(const current: longint);
+    procedure ReachedCB(sender: TObject; const current: longint);
     procedure Execute;
   end;
 
@@ -25,22 +25,23 @@ var
   e: TExample;
 
 { Callback for current greater than 1A }
-procedure TExample.ReachedCB(const current: longint);
+procedure TExample.ReachedCB(sender: TObject; const current: longint);
 begin
   WriteLn(Format('Current is greater than 1A: %f', [current/1000.0]));
 end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create;
 
   { Create device object }
-  vc := TBrickletVoltageCurrent.Create(UID);
+  vc := TBrickletVoltageCurrent.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(vc);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
+
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   vc.SetDebouncePeriod(10000);

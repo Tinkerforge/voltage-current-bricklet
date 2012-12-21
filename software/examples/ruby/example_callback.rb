@@ -10,10 +10,11 @@ HOST = 'localhost'
 PORT = 4223
 UID = 'ABC' # Change to your UID
 
-ipcon = IPConnection.new HOST, PORT # Create IP connection to brickd
-vc = BrickletVoltageCurrent.new UID # Create device object
-ipcon.add_device vc # Add device to IP connection
-# Don't use device before it is added to a connection
+ipcon = IPConnection.new # Create IP connection
+vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
+
+ipcon.connect HOST, PORT # Connect to brickd
+# Don't use device before ipcon is connected
 
 # Set Period for current callback to 1s (1000ms)
 # Note: The callback is only called every second if the 
@@ -27,4 +28,3 @@ end
 
 puts 'Press key to exit'
 $stdin.gets
-ipcon.destroy

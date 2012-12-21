@@ -27,15 +27,15 @@ procedure TExample.Execute;
 var current: longint;
 var voltage: longint;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create;
 
   { Create device object }
-  vc := TBrickletVoltageCurrent.Create(UID);
+  vc := TBrickletVoltageCurrent.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(vc);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
 
   { Get current current and voltage (unit is mA and mV) }
   current := vc.GetCurrent;

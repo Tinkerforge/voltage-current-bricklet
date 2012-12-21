@@ -16,11 +16,11 @@ function cb_current($current)
     echo "Current: " . $current / 1000.0 . " A\n";
 }
 
-$ipcon = new IPConnection($host, $port); // Create IP connection to brickd
-$vc = new BrickletVoltageCurrent($uid); // Create device object
+$ipcon = new IPConnection(); // Create IP connection
+$vc = new BrickletVoltageCurrent($uid, $ipcon); // Create device object
 
-$ipcon->addDevice($vc); // Add device to IP connection
-// Don't use device before it is added to a connection
+$ipcon->connect($host, $port); // Connect to brickd
+// Don't use device before ipcon is connected
 
 // Set Period for current callback to 1s (1000ms)
 // Note: The callback is only called every second if the 
