@@ -35,7 +35,7 @@ int main() {
 	// Register threshold reached callback to function cb_reached
 	voltage_current_register_callback(&vc, 
 	                                  VOLTAGE_CURRENT_CALLBACK_CURRENT_REACHED,
-	                                  cb_reached,
+	                                  (void *)cb_reached,
 									  NULL);
 	
 	// Configure threshold for "greater than 1A" (unit is mA)

@@ -37,7 +37,7 @@ int main() {
 	// Register current callback to function cb_current
 	voltage_current_register_callback(&vc, 
 	                                  VOLTAGE_CURRENT_CALLBACK_CURRENT, 
-	                                  cb_current, 
+	                                  (void *)cb_current, 
 	                                  NULL);
 
 	printf("Press key to exit\n");
