@@ -15,7 +15,7 @@ int main() {
 
 	// Create device object
 	VoltageCurrent vc;
-	voltage_current_create(&vc, UID, &ipcon); 
+	voltage_current_create(&vc, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -36,7 +36,6 @@ int main() {
 		fprintf(stderr, "Could not get value, probably timeout\n");
 		exit(1);
 	}
-
 
 	printf("Current: %f A\n", current/1000.0);
 	printf("Voltage: %f V\n", voltage/1000.0);
