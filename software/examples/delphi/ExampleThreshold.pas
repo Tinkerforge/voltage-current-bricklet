@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     vc: TBrickletVoltageCurrent;
   public
-    procedure ReachedCB(sender: TObject; const current: longint);
+    procedure ReachedCB(sender: TBrickletVoltageCurrent; const current: longint);
     procedure Execute;
   end;
 
@@ -25,7 +25,7 @@ var
   e: TExample;
 
 { Callback for current greater than 1A }
-procedure TExample.ReachedCB(sender: TObject; const current: longint);
+procedure TExample.ReachedCB(sender: TBrickletVoltageCurrent; const current: longint);
 begin
   WriteLn(Format('Current is greater than 1A: %f', [current/1000.0]));
 end;

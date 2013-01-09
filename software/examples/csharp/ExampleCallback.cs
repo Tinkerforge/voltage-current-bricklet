@@ -7,7 +7,7 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback function for current callback (parameter has unit mA)
-	static void CurrentCB(object sender, int current)
+	static void CurrentCB(BrickletVoltageCurrent sender, int current)
 	{
 		System.Console.WriteLine("Current: " + current/1000.0 + " A");
 	}
