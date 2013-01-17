@@ -23,7 +23,7 @@ public class ExampleThreshold {
 		vc.setCurrentCallbackThreshold('>', 1*1000, 0);
 
 		// Add and implement current reached listener (called if current is greater than 1A)
-		vc.addListener(new BrickletVoltageCurrent.CurrentReachedListener() {
+		vc.addCurrentReachedListener(new BrickletVoltageCurrent.CurrentReachedListener() {
 			public void currentReached(int current) {
 				System.out.println("Current is greater than 1A: " + current/1000.0);
 			}

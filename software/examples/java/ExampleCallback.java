@@ -22,7 +22,7 @@ public class ExampleCallback {
 		vc.setCurrentCallbackPeriod(1000);
 
 		// Add and implement current listener (called if current changes)
-		vc.addListener(new BrickletVoltageCurrent.CurrentListener() {
+		vc.addCurrentListener(new BrickletVoltageCurrent.CurrentListener() {
 			public void current(int current) {
 				System.out.println("Current: " + current/1000.0 + " A");
 			}
