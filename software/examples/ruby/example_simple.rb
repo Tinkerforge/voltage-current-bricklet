@@ -24,3 +24,4 @@ puts "Voltage: #{voltage} V"
 
 puts 'Press key to exit'
 $stdin.gets
+ipcon.disconnect

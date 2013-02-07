@@ -29,3 +29,4 @@ vc.set_current_callback_threshold '>', 1*1000, 0
 
 puts 'Press key to exit'
 $stdin.gets
+ipcon.disconnect

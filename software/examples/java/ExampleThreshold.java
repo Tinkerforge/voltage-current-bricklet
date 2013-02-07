@@ -30,5 +30,6 @@ public class ExampleThreshold {
 		});
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }

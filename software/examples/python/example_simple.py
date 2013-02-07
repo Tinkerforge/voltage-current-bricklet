@@ -23,3 +23,4 @@ if __name__ == "__main__":
     print('Voltage: ' + str(voltage/1000.0) + ' V')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    ipcon.disconnect()
