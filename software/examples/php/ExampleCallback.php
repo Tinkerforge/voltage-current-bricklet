@@ -6,9 +6,9 @@ require_once('Tinkerforge/BrickletVoltageCurrent.php');
 use Tinkerforge\IPConnection;
 use Tinkerforge\BrickletVoltageCurrent;
 
-$host = 'localhost';
-$port = 4223;
-$uid = 'ABC'; // Change to your UID
+const HOST = 'localhost';
+const PORT = 4223;
+const UID = 'ABC'; // Change to your UID
 
 // Callback function for current callback (parameter has unit mA)
 function cb_current($current)
@@ -17,9 +17,9 @@ function cb_current($current)
 }
 
 $ipcon = new IPConnection(); // Create IP connection
-$vc = new BrickletVoltageCurrent($uid, $ipcon); // Create device object
+$vc = new BrickletVoltageCurrent(UID, $ipcon); // Create device object
 
-$ipcon->connect($host, $port); // Connect to brickd
+$ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
 // Set Period for current callback to 1s (1000ms)
