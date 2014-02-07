@@ -1,0 +1,113 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[      4067,        112]
+NotebookOptionsPosition[      3635,         91]
+NotebookOutlinePosition[      3973,        106]
+CellTagsIndexPosition[      3930,        103]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"LoadNETAssembly", "[", 
+  RowBox[{"\"\<Tinkerforge\>\"", ",", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.600175052949191*^9, 3.600175066601799*^9}, 
+   3.600175102142559*^9, {3.6001753172765293`*^9, 3.600175317946432*^9}, {
+   3.600500538026902*^9, 3.600500561851948*^9}, {3.600506097634747*^9, 
+   3.600506099012146*^9}, 3.600506136278721*^9, {3.60060805238198*^9, 
+   3.600608117803465*^9}, 3.600685373189396*^9}],
+
+Cell[BoxData[{
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
+ RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uid", "=", "\"\<amb\>\""}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ipcon", "=", 
+  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
+ RowBox[{"vc", "=", 
+  RowBox[{"NETNew", "[", 
+   RowBox[{
+   "\"\<Tinkerforge.BrickletVoltageCurrent\>\"", ",", "uid", ",", "ipcon"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ipcon", "@", 
+   RowBox[{"Connect", "[", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Get", " ", "current", " ", "current", " ", "and", " ", "voltage", " ", 
+    RowBox[{"(", 
+     RowBox[{"unit", " ", "is", " ", "mA", " ", "and", " ", "mV"}], ")"}]}], 
+   " ", "*)"}]}], "\n", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Current: \>\"", "<>", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"N", "[", 
+     RowBox[{"Quantity", "[", 
+      RowBox[{
+       RowBox[{"vc", "@", 
+        RowBox[{"GetCurrent", "[", "]"}]}], ",", "\"\<mA\>\""}], "]"}], "]"}],
+     "]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Voltage: \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"N", "[", 
+      RowBox[{"Quantity", "[", 
+       RowBox[{
+        RowBox[{"vc", "@", 
+         RowBox[{"GetVoltage", "[", "]"}]}], ",", "\"\<mV\>\""}], "]"}], 
+      "]"}], "]"}]}], "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ipcon", "@", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "vc", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdzTtIQnEUBnAJ6U0tPSxCSooGKUpzESnDQYdeNKiQYNjrgmZSSA05tVVY
+WlRmig4ibdGDLEqIQFAo7GUmlo11sYbIQqjofv/h8IOPc75Tp5voH8lhsVg1
+zMCo9qPNcU13tugEImjtTmhhw+uFDp792cagIrU9CR/7xNOQx++wQ3ZufAsK
+00IX3OGWz24yLvimiKPLsTniJ03UB7xpD2PJ0eEbTDmKM9BtoL+h0q75gS/3
+FLF13c/zIuc666GRw+bDTJOyGVIKWgRDzizxyW2xQ1NQvgJVlQ7ZKf7L4j1Q
+7rpUQkFSo4Zr8/OSc8ZuW7QdGjO1rAj6AtpS6LAOVcCD3wIOzBsXP1A3zJ2q
+LAEjHSc0NOzeEUOFx6t6Rvo96IT8dL4PUs8bfijNzgy4GCX70mG41Fhtghaq
+lyg2d5lhWD1ILNr4uoKexVCM7CX14TTjXhXvFv4DD2AFLA==
+  "]]
+},
+WindowSize->{1521, 867},
+WindowMargins->{{335, Automatic}, {55, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 602, 11, 55, "Input"],
+Cell[1005, 26, 2626, 63, 385, "Input"]
+}
+]
+*)
+

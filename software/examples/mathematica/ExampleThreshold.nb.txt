@@ -1,0 +1,30 @@
+Needs["NETLink`"]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
+host="localhost"
+port=4223
+uid="amb"(* Change to your UID *)
+
+(* Create IPConnection and device object *)
+ipcon=NETNew["Tinkerforge.IPConnection"]
+vc=NETNew["Tinkerforge.BrickletVoltageCurrent",uid,ipcon]
+ipcon@Connect[host,port]
+
+(* Get threshold callbacks with a debounce time of 1 second (1000ms) *)
+vc@SetDebouncePeriod[1000]
+
+(* Callback for current greater than 1A *)
+CurrentReachedCB[sender_,current_]:=
+ Print["Current is greater than 1A: "<>ToString[N[Quantity[current,"mA"]]]]
+AddEventHandler[vc@CurrentReached,CurrentReachedCB]
+
+(* Configure threshold for "greater than 1A" (unit is mA) *)
+option=Tinkerforge`BrickletVoltageCurrent`THRESHOLDUOPTIONUGREATER
+vc@SetCurrentCallbackThreshold[option,1*1000,0]
+
+Input["Click OK to exit"]
+
+(* Clean up *)
+ipcon@Disconnect[]
+ReleaseNETObject[vc]
+ReleaseNETObject[ipcon]
