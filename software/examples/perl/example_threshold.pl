@@ -7,8 +7,8 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => '555'; # Change to your UID
 
-my $ipcon = IPConnection->new(); # Create IP connection
-my $vc = BrickletVoltageCurrent->new(&UID, $ipcon); # Create device object
+my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
+my $vc = Tinkerforge::BrickletVoltageCurrent->new(&UID, $ipcon); # Create device object
 
 # Callback for current greater than 1A
 sub cb_reached
