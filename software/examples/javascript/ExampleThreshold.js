@@ -1,12 +1,11 @@
-var IPConnection = require('Tinkerforge/IPConnection');
-var BrickletVoltageCurrent = require('Tinkerforge/BrickletVoltageCurrent');
+var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
 var UID = '555';// Change to your UID
 
-var ipcon = new IPConnection();// Create IP connection
-var vc = new BrickletVoltageCurrent(UID, ipcon);// Create device object
+var ipcon = new Tinkerforge.IPConnection();// Create IP connection
+var vc = new Tinkerforge.BrickletVoltageCurrent(UID, ipcon);// Create device object
 
 ipcon.connect(HOST, PORT,
     function(error) {
@@ -15,7 +14,7 @@ ipcon.connect(HOST, PORT,
 );// Connect to brickd
 
 // Don't use device before ipcon is connected
-ipcon.on(IPConnection.CALLBACK_CONNECTED,
+ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
     function(connectReason) {
         //Get threshold callbacks with a debounce time of 10 seconds (10000ms)
         vc.setDebouncePeriod(10000);
@@ -25,7 +24,7 @@ ipcon.on(IPConnection.CALLBACK_CONNECTED,
 );
 
 // Register threshold reached callback
-vc.on(BrickletVoltageCurrent.CALLBACK_CURRENT_REACHED,
+vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT_REACHED,
     //Callback for current greater than 1A
     function(current) {
         console.log('Current is greater than 1A: '+current/1000+' A');
