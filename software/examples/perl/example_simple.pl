@@ -14,12 +14,12 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
 # Get current current and voltage (unit is mA and mV)
-my $current = $vc->get_current();
-my $voltage = $vc->get_voltage();
+my $current = $vc->get_current()/1000.0;
+print "Current: $current A\n";
 
-print "\nCurrent: ".$current/1000.0." A";
-print "\nVoltage: ".$voltage/1000.0." V\n";
+my $voltage = $vc->get_voltage()/1000.0;
+print "Voltage: $voltage V\n";
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();

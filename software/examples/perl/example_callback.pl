@@ -14,8 +14,10 @@ my $vc = Tinkerforge::BrickletVoltageCurrent->new(&UID, $ipcon); # Create device
 sub cb_current
 {
     my ($current) = @_;
-    print "\nCurrent: ".$current/1000.0." A\n";
+
+    print "Current: ".$current/1000.0." A\n";
 }
+
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
@@ -27,6 +29,6 @@ $vc->set_current_callback_period(1000);
 # Register current callback to function cb_current
 $vc->register_callback($vc->CALLBACK_CURRENT, 'cb_current');
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();

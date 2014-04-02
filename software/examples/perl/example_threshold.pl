@@ -13,9 +13,9 @@ my $vc = Tinkerforge::BrickletVoltageCurrent->new(&UID, $ipcon); # Create device
 # Callback for current greater than 1A
 sub cb_reached
 {
-    my($current) = @_;
+    my ($current) = @_;
 
-    print "\nCurrent is greater than 1A: ".$current/1000.0."\n";
+    print "Current is greater than 1A: ".$current/1000.0."\n";
 }
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
@@ -30,6 +30,6 @@ $vc->register_callback($vc->CALLBACK_CURRENT_REACHED, 'cb_reached');
 # Configure threshold for "greater than 1A" (unit is mA)
 $vc->set_current_callback_threshold('>', 200, 0);
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
