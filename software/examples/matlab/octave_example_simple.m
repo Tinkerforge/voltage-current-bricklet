@@ -14,8 +14,8 @@ function octave_example_simple()
     % Get current current and voltage (unit is mA and mV)
     current = vc.getCurrent();
     voltage = vc.getVoltage();
-    fprintf('Current: %g A\n', current/1000.0);
-    fprintf('Voltage: %g V\n', voltage/1000.0);
+    fprintf("Current: %g A\n", current/1000.0);
+    fprintf("Voltage: %g V\n", voltage/1000.0);
 
     input("Press any key to exit...\n", "s");
     ipcon.disconnect();
