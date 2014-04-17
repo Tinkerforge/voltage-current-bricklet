@@ -1,4 +1,4 @@
-function matlab_example_threshold
+function matlab_example_threshold()
     import com.tinkerforge.IPConnection;
     import com.tinkerforge.BrickletVoltageCurrent;
 
@@ -29,4 +29,3 @@ end
 function cb_reached(e)
     fprintf('Current is greater than 1A: %g \n', e.current/1000.0);
 end
-
