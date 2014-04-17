@@ -16,17 +16,17 @@ function matlab_example_threshold
     vc.setDebouncePeriod(10000);
 
     % Register threshold reached callback to function cb_reached
-    set(vc, 'CurrentCallback', @(h, e)cb_reached(e.current));
+    set(vc, 'CurrentCallback', @(h, e) cb_reached(e));
 
     % Configure threshold for "greater than 1A" (unit is mA)
     vc.setCurrentCallbackThreshold('>', 1*1000, 0);
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
 
 % Callback for current greater than 1A
-function cb_reached(current_value)
-    fprintf('Current is greater than 1A: %g \n', current_value/1000);
+function cb_reached(e)
+    fprintf('Current is greater than 1A: %g \n', e.current/1000.0);
 end
 

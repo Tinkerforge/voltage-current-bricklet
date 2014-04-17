@@ -18,13 +18,13 @@ function matlab_example_callback
     vc.setCurrentCallbackPeriod(1000);
 
     % Register current callback to function cb_current
-    set(vc, 'CurrentCallback', @(h, e)cb_current(e.current));
+    set(vc, 'CurrentCallback', @(h, e) cb_current(e));
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
 
-% Callback function for humidity callback (parameter has unit %RH/10)
-function cb_current(current_value)
-    fprintf('Current: %g A\n', current_value/1000);
+% Callback function for current callback (parameter has unit mA)
+function cb_current(e)
+    fprintf('Current: %g A\n', e.current/1000.0);
 end

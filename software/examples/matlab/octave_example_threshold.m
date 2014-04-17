@@ -15,19 +15,16 @@ function octave_example_threshold
     vc.setDebouncePeriod(10000);
 
     % Register threshold reached callback to function cb_reached
-    vc.addCurrentReachedListener("cb_reached");
+    vc.addCurrentReachedCallback(@cb_reached);
 
     % Configure threshold for "greater than 1A" (unit is mA)
     vc.setCurrentCallbackThreshold(vc.THRESHOLD_OPTION_GREATER, 1*1000, 0);
 
-    % Register humidity callback to function cb_humidity
-    vc.addCurrentListener("cb_current");
-
-    input("\nPress any key to exit...\n", "s");
+    input("Press any key to exit...\n", "s");
     ipcon.disconnect();
 end
 
 % Callback for current greater than 1A
-function cb_reached(current_value)
-    fprintf("Current is greater than 1A: %g \n", current_value/1000);
+function cb_reached(e)
+    fprintf("Current is greater than 1A: %g \n", e.current/1000);
 end

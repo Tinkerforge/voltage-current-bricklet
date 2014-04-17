@@ -15,10 +15,9 @@ function matlab_example_callback
     % Get current current and voltage (unit is mA and mV)
     current = vc.getCurrent();
     voltage = vc.getVoltage();
+    fprintf('Current: %g A\n', current/1000.0);
+    fprintf('Voltage: %g V\n', voltage/1000.0);
 
-    fprintf('Current: %g A\n', current/1000);
-    fprintf('Voltage: %g V\n', voltage/1000);
-
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
