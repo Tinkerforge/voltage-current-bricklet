@@ -28,8 +28,8 @@ class Example
 		// Register current callback to function CurrentCB
 		vc.Current += CurrentCB;
 
-		System.Console.WriteLine("Press key to exit");
-		System.Console.ReadKey();
+		System.Console.WriteLine("Press enter to exit");
+		System.Console.ReadLine();
 		ipcon.Disconnect();
     }
 }
