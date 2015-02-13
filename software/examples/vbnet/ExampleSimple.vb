@@ -20,7 +20,7 @@ Module ExampleSimple
         System.Console.WriteLine("Voltage: " + (voltage/1000.0).ToString() + " V")
 
         System.Console.WriteLine("Press key to exit")
-        System.Console.ReadKey()
+        System.Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module
