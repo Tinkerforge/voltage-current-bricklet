@@ -51,8 +51,7 @@
                 vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT_REACHED,
                     // Callback for current greater than 1A
                     function(current) {
-                        textArea.value += 'Current is greater than 1A: '+current/1000+' A';
-                        textArea.value += '\n';
+                        textArea.value += 'Current is greater than 1A: '+current/1000+' A\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
