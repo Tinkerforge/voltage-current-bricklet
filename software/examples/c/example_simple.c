@@ -5,10 +5,10 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "ABCD" // Change to your UID
+#define UID "XYZ" // Change to your UID
 
 int main() {
-	// Create ip connection to brickd
+	// Create IP connection
 	IPConnection ipcon;
 	ipcon_create(&ipcon);
 
@@ -23,21 +23,23 @@ int main() {
 	}
 	// Don't use device before ipcon is connected
 
-	// Get current current and voltage (unit is mA and mV)
-	int32_t current;
-	if(voltage_current_get_current(&vc, &current) < 0) {
-		fprintf(stderr, "Could not get value, probably timeout\n");
+	// Get current voltage (unit is mV)
+	int32_t voltage;
+	if(voltage_current_get_voltage(&vc, &voltage) < 0) {
+		fprintf(stderr, "Could not get voltage, probably timeout\n");
 		exit(1);
 	}
 
-	int32_t voltage;
-	if(voltage_current_get_voltage(&vc, &voltage) < 0) {
-		fprintf(stderr, "Could not get value, probably timeout\n");
+	printf("Voltage: %f V\n", voltage/1000.0);
+
+	// Get current current (unit is mA)
+	int32_t current;
+	if(voltage_current_get_current(&vc, &current) < 0) {
+		fprintf(stderr, "Could not get current, probably timeout\n");
 		exit(1);
 	}
 
 	printf("Current: %f A\n", current/1000.0);
-	printf("Voltage: %f V\n", voltage/1000.0);
 
 	printf("Press key to exit\n");
 	getchar();

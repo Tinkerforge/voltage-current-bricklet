@@ -8,7 +8,7 @@ include Tinkerforge
 
 HOST = 'localhost'
 PORT = 4223
-UID = 'ABC' # Change to your UID
+UID = 'XYZ' # Change to your UID
 
 ipcon = IPConnection.new # Create IP connection
 vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
@@ -16,11 +16,13 @@ vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Get current current and voltage (unit is mA and mV)
-current = vc.get_current / 1000.0
-voltage = vc.get_voltage / 1000.0
-puts "Current: #{current} A"
-puts "Voltage: #{voltage} V"
+# Get current voltage (unit is mV)
+voltage = vc.get_voltage
+puts "Voltage: #{voltage/1000.0} V"
+
+# Get current current (unit is mA)
+current = vc.get_current
+puts "Current: #{current/1000.0} A"
 
 puts 'Press key to exit'
 $stdin.gets
