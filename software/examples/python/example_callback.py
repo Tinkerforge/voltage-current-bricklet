@@ -6,7 +6,7 @@ PORT = 4223
 UID = "XYZ" # Change to your UID
 
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_voltage_current import VoltageCurrent
+from tinkerforge.bricklet_voltage_current import BrickletVoltageCurrent
 
 # Callback function for voltage callback (parameter has unit mV)
 def cb_voltage(voltage):
@@ -18,7 +18,7 @@ def cb_current(current):
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    vc = VoltageCurrent(UID, ipcon) # Create device object
+    vc = BrickletVoltageCurrent(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
