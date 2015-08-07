@@ -15,18 +15,6 @@ public class ExampleCallback {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Set period for voltage callback to 1s (1000ms)
-		// Note: The voltage callback is only called every second
-		//       if the voltage has changed since the last call!
-		vc.setVoltageCallbackPeriod(1000);
-
-		// Add voltage listener (parameter has unit mV)
-		vc.addVoltageListener(new BrickletVoltageCurrent.VoltageListener() {
-			public void voltage(int voltage) {
-				System.out.println("Voltage: " + voltage/1000.0 + " V");
-			}
-		});
-
 		// Set period for current callback to 1s (1000ms)
 		// Note: The current callback is only called every second
 		//       if the current has changed since the last call!

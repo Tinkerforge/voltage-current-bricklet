@@ -19,24 +19,13 @@ ipcon.connect HOST, PORT # Connect to brickd
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 vc.set_debounce_period 10000
 
-# Register threshold reached callback for voltage greater than 5000 V (parameter has unit mV)
-vc.register_callback(BrickletVoltageCurrent::CALLBACK_VOLTAGE_REACHED) do |voltage|
-  puts "Voltage: #{voltage/1000.0} V"
+# Register threshold reached callback for power greater than 10 W (parameter has unit mW)
+vc.register_callback(BrickletVoltageCurrent::CALLBACK_POWER_REACHED) do |power|
+  puts "Power: #{power/1000.0} W"
 end
 
-# Configure threshold for "greater than 5000 V" (unit is mV)
-vc.set_voltage_callback_threshold '>', 5000*1000, 0
-
-# Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-vc.set_debounce_period 10000
-
-# Register threshold reached callback for current greater than 1000 A (parameter has unit mA)
-vc.register_callback(BrickletVoltageCurrent::CALLBACK_CURRENT_REACHED) do |current|
-  puts "Current: #{current/1000.0} A"
-end
-
-# Configure threshold for "greater than 1000 A" (unit is mA)
-vc.set_current_callback_threshold '>', 1000*1000, 0
+# Configure threshold for "greater than 10 W" (unit is mW)
+vc.set_power_callback_threshold '>', 10*1000, 0
 
 puts 'Press key to exit'
 $stdin.gets

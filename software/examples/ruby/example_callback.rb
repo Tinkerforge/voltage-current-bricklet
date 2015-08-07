@@ -16,16 +16,6 @@ vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Set period for voltage callback to 1s (1000ms)
-# Note: The voltage callback is only called every second
-#       if the voltage has changed since the last call!
-vc.set_voltage_callback_period 1000
-
-# Register voltage callback (parameter has unit mV)
-vc.register_callback(BrickletVoltageCurrent::CALLBACK_VOLTAGE) do |voltage|
-  puts "Voltage: #{voltage/1000.0} V"
-end
-
 # Set period for current callback to 1s (1000ms)
 # Note: The current callback is only called every second
 #       if the current has changed since the last call!

@@ -7,18 +7,11 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback function for voltage greater than 5000 V (parameter has unit mV)
-void cb_voltage_reached(int32_t voltage, void *user_data) {
+// Callback function for power greater than 10 W (parameter has unit mW)
+void cb_power_reached(int32_t power, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Voltage: %f V\n", voltage/1000.0);
-}
-
-// Callback function for current greater than 1000 A (parameter has unit mA)
-void cb_current_reached(int32_t current, void *user_data) {
-	(void)user_data; // avoid unused parameter warning
-
-	printf("Current: %f A\n", current/1000.0);
+	printf("Power: %f W\n", power/1000.0);
 }
 
 int main() {
@@ -40,26 +33,14 @@ int main() {
 	// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 	voltage_current_set_debounce_period(&vc, 10000);
 
-	// Register threshold reached callback to function cb_voltage_reached
+	// Register threshold reached callback to function cb_power_reached
 	voltage_current_register_callback(&vc,
-	                                  VOLTAGE_CURRENT_CALLBACK_VOLTAGE_REACHED,
-	                                  (void *)cb_voltage_reached,
+	                                  VOLTAGE_CURRENT_CALLBACK_POWER_REACHED,
+	                                  (void *)cb_power_reached,
 	                                  NULL);
 
-	// Configure threshold for "greater than 5000 V" (unit is mV)
-	voltage_current_set_voltage_callback_threshold(&vc, '>', 5000*1000, 0);
-
-	// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-	voltage_current_set_debounce_period(&vc, 10000);
-
-	// Register threshold reached callback to function cb_current_reached
-	voltage_current_register_callback(&vc,
-	                                  VOLTAGE_CURRENT_CALLBACK_CURRENT_REACHED,
-	                                  (void *)cb_current_reached,
-	                                  NULL);
-
-	// Configure threshold for "greater than 1000 A" (unit is mA)
-	voltage_current_set_current_callback_threshold(&vc, '>', 1000*1000, 0);
+	// Configure threshold for "greater than 10 W" (unit is mW)
+	voltage_current_set_power_callback_threshold(&vc, '>', 10*1000, 0);
 
 	printf("Press key to exit\n");
 	getchar();

@@ -6,16 +6,10 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change to your UID
 
-	// Callback function for voltage greater than 5000 V (parameter has unit mV)
-	static void VoltageReachedCB(BrickletVoltageCurrent sender, int voltage)
+	// Callback function for power greater than 10 W (parameter has unit mW)
+	static void PowerReachedCB(BrickletVoltageCurrent sender, int power)
 	{
-		System.Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
-	}
-
-	// Callback function for current greater than 1000 A (parameter has unit mA)
-	static void CurrentReachedCB(BrickletVoltageCurrent sender, int current)
-	{
-		System.Console.WriteLine("Current: " + current/1000.0 + " A");
+		System.Console.WriteLine("Power: " + power/1000.0 + " W");
 	}
 
 	static void Main()
@@ -29,20 +23,11 @@ class Example
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		vc.SetDebouncePeriod(10000);
 
-		// Register threshold reached callback to function VoltageReachedCB
-		vc.VoltageReached += VoltageReachedCB;
+		// Register threshold reached callback to function PowerReachedCB
+		vc.PowerReached += PowerReachedCB;
 
-		// Configure threshold for "greater than 5000 V" (unit is mV)
-		vc.SetVoltageCallbackThreshold('>', 5000*1000, 0);
-
-		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-		vc.SetDebouncePeriod(10000);
-
-		// Register threshold reached callback to function CurrentReachedCB
-		vc.CurrentReached += CurrentReachedCB;
-
-		// Configure threshold for "greater than 1000 A" (unit is mA)
-		vc.SetCurrentCallbackThreshold('>', 1000*1000, 0);
+		// Configure threshold for "greater than 10 W" (unit is mW)
+		vc.SetPowerCallbackThreshold('>', 10*1000, 0);
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();

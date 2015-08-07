@@ -18,26 +18,13 @@ public class ExampleThreshold {
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		vc.setDebouncePeriod(10000);
 
-		// Configure threshold for "greater than 5000 V" (unit is mV)
-		vc.setVoltageCallbackThreshold('>', 5000*1000, 0);
+		// Configure threshold for "greater than 10 W" (unit is mW)
+		vc.setPowerCallbackThreshold('>', 10*1000, 0);
 
-		// Add threshold reached listener for voltage greater than 5000 V (parameter has unit mV)
-		vc.addVoltageReachedListener(new BrickletVoltageCurrent.VoltageReachedListener() {
-			public void voltageReached(int voltage) {
-				System.out.println("Voltage: " + voltage/1000.0 + " V");
-			}
-		});
-
-		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-		vc.setDebouncePeriod(10000);
-
-		// Configure threshold for "greater than 1000 A" (unit is mA)
-		vc.setCurrentCallbackThreshold('>', 1000*1000, 0);
-
-		// Add threshold reached listener for current greater than 1000 A (parameter has unit mA)
-		vc.addCurrentReachedListener(new BrickletVoltageCurrent.CurrentReachedListener() {
-			public void currentReached(int current) {
-				System.out.println("Current: " + current/1000.0 + " A");
+		// Add threshold reached listener for power greater than 10 W (parameter has unit mW)
+		vc.addPowerReachedListener(new BrickletVoltageCurrent.PowerReachedListener() {
+			public void powerReached(int power) {
+				System.out.println("Power: " + power/1000.0 + " W");
 			}
 		});
 

@@ -19,10 +19,6 @@ public class ExampleSimple {
 		int voltage = vc.getVoltage(); // Can throw com.tinkerforge.TimeoutException
 		System.out.println("Voltage: " + voltage/1000.0 + " V");
 
-		// Get current current (unit is mA)
-		int current = vc.getCurrent(); // Can throw com.tinkerforge.TimeoutException
-		System.out.println("Current: " + current/1000.0 + " A");
-
 		System.out.println("Press key to exit"); System.in.read();
 		ipcon.disconnect();
 	}
