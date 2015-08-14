@@ -18,13 +18,12 @@ type
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = 'ABC'; { Change to your UID }
+  UID = 'XYZ'; { Change to your UID }
 
 var
   e: TExample;
 
 procedure TExample.Execute;
-var current: longint;
 var voltage: longint;
 begin
   { Create IP connection }
@@ -37,10 +36,8 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Get current current and voltage (unit is mA and mV) }
-  current := vc.GetCurrent;
+  { Get current voltage (unit is mV) }
   voltage := vc.GetVoltage;
-  WriteLn(Format('Current: %f A', [current/1000.0]));
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
 
   WriteLn('Press key to exit');

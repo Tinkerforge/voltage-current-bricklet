@@ -12,22 +12,22 @@ type
     ipcon: TIPConnection;
     vc: TBrickletVoltageCurrent;
   public
-    procedure ReachedCB(sender: TBrickletVoltageCurrent; const current: longint);
+    procedure PowerReachedCB(sender: TBrickletVoltageCurrent; const power: longint);
     procedure Execute;
   end;
 
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = 'ABC'; { Change to your UID }
+  UID = 'XYZ'; { Change to your UID }
 
 var
   e: TExample;
 
-{ Callback for current greater than 1A }
-procedure TExample.ReachedCB(sender: TBrickletVoltageCurrent; const current: longint);
+{ Callback procedure for power greater than 10 W (parameter has unit mW) }
+procedure TExample.PowerReachedCB(sender: TBrickletVoltageCurrent; const power: longint);
 begin
-  WriteLn(Format('Current is greater than 1A: %f', [current/1000.0]));
+  WriteLn(Format('Power: %f W', [power/1000.0]));
 end;
 
 procedure TExample.Execute;
@@ -42,15 +42,14 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   vc.SetDebouncePeriod(10000);
 
-  { Register threshold reached callback to procedure ReachedCB }
-  vc.OnCurrentReached := {$ifdef FPC}@{$endif}ReachedCB;
+  { Register threshold reached callback to procedure PowerReachedCB }
+  vc.OnPowerReached := {$ifdef FPC}@{$endif}PowerReachedCB;
 
-  { Configure threshold for "greater than 1A" (unit is mA) }
-  vc.SetCurrentCallbackThreshold('>', 1*1000, 0);
+  { Configure threshold for "greater than 10 W" (unit is mW) }
+  vc.SetPowerCallbackThreshold('>', 10*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
