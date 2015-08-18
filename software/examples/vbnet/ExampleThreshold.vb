@@ -3,11 +3,11 @@ Imports Tinkerforge
 Module ExampleThreshold
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "aNt" ' Change to your UID
+    Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback for current greater than 1A
-    Sub ReachedCB(ByVal sender As BrickletVoltageCurrent, ByVal current As Integer)
-        System.Console.WriteLine("Current is greater than 1A: " + (current/1000.0).ToString() + "A")
+    ' Callback function for power greater than 10 W (parameter has unit mW)
+    Sub PowerReachedCB(ByVal sender As BrickletVoltageCurrent, ByVal power As Integer)
+        System.Console.WriteLine("Power: " + (power/1000.0).ToString() + " W")
     End Sub
 
     Sub Main()
@@ -20,11 +20,11 @@ Module ExampleThreshold
         ' Get threshold callbacks with a debounce time of 10 seconds (10000ms)
         vc.SetDebouncePeriod(10000)
 
-        ' Register threshold reached callback to function ReachedCB
-        AddHandler vc.CurrentReached, AddressOf ReachedCB
+        ' Register threshold reached callback to function PowerReachedCB
+        AddHandler vc.PowerReached, AddressOf PowerReachedCB
 
-        ' Configure threshold for "greater than 1A" (unit is mA)
-        vc.SetCurrentCallbackThreshold(">"C, 1*1000, 0)
+        ' Configure threshold for "greater than 10 W" (unit is mW)
+        vc.SetPowerCallbackThreshold(">"C, 10*1000, 0)
 
         System.Console.WriteLine("Press key to exit")
         System.Console.ReadLine()

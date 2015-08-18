@@ -3,7 +3,7 @@ Imports Tinkerforge
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "aNt" ' Change to your UID
+    Const UID As String = "XYZ" ' Change to your UID
 
     ' Callback function for current callback (parameter has unit mA)
     Sub CurrentCB(ByVal sender As BrickletVoltageCurrent, ByVal current As Integer)
@@ -17,9 +17,9 @@ Module ExampleCallback
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Set Period for current callback to 1s (1000ms)
-        ' Note: The current callback is only called every second if the 
-        '       current has changed since the last call!
+        ' Set period for current callback to 1s (1000ms)
+        ' Note: The current callback is only called every second
+        '       if the current has changed since the last call!
         vc.SetCurrentCallbackPeriod(1000)
 
         ' Register current callback to function CurrentCB
