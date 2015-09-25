@@ -6,7 +6,7 @@
     </head>
     <body>
         <div style="text-align:center;">
-            <h1>Voltage/Current Bricklet Thershold Example</h1>
+            <h1>Voltage/Current Bricklet Threshold Example</h1>
             <p>
                 <input value="localhost" id="host" type="text" size="20">:
                 <input value="4280" id="port" type="text" size="5">,
@@ -34,24 +34,26 @@
                 var vc = new Tinkerforge.BrickletVoltageCurrent(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
+                    function (connectReason) {
                         // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
                         vc.setDebouncePeriod(10000);
-                        // Configure threshold for "greater than 1A" (unit is mA)
-                        vc.setCurrentCallbackThreshold('>', 1*1000, 0);
+
+                        // Configure threshold for power "greater than 10 W" (unit is mW)
+                        vc.setPowerCallbackThreshold('>', 10*1000, 0);
                     }
                 );
-                // Register threshold reached callback
-                vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT_REACHED,
-                    // Callback for current greater than 1A
-                    function(current) {
-                        textArea.value += 'Current is greater than 1A: '+current/1000+' A\n';
+
+                // Register power reached callback
+                vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_POWER_REACHED,
+                    // Callback function for power reached callback (parameter has unit mW)
+                    function (power) {
+                        textArea.value += 'Power: ' + power/1000.0 + ' W\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

@@ -1,15 +1,17 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
-# get threshold callbacks with a debounce time of 10 seconds (10000ms)
+# Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 tinkerforge call voltage-current-bricklet $uid set-debounce-period 10000
 
-# configure threshold for "greater than 1A" (unit is mA)
-tinkerforge call voltage-current-bricklet $uid set-current-callback-threshold greater 1000 0
+# Handle incoming power reached callbacks (parameter has unit mW)
+tinkerforge dispatch voltage-current-bricklet $uid power-reached &
 
-# handle incoming current-reached callbacks (unit is mA)
-tinkerforge dispatch voltage-current-bricklet $uid current-reached\
- --execute "echo Current is greater than 1A: {current} mA"
+# Configure threshold for power "greater than 10 W" (unit is mW)
+tinkerforge call voltage-current-bricklet $uid set-power-callback-threshold greater 10000 0
+
+echo "Press key to exit"; read dummy
+
+kill -- -$$ # Stop callback dispatch in background

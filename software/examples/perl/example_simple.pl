@@ -17,6 +17,10 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 my $voltage = $vc->get_voltage();
 print "Voltage: " . $voltage/1000.0 . " V\n";
 
-print "Press any key to exit...\n";
+# Get current current (unit is mA)
+my $current = $vc->get_current();
+print "Current: " . $current/1000.0 . " A\n";
+
+print "Press key to exit\n";
 <STDIN>;
 $ipcon->disconnect();

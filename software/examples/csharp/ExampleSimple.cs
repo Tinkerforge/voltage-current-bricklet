@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -16,10 +17,14 @@ class Example
 
 		// Get current voltage (unit is mV)
 		int voltage = vc.GetVoltage();
-		System.Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
+		Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		// Get current current (unit is mA)
+		int current = vc.GetCurrent();
+		Console.WriteLine("Current: " + current/1000.0 + " A");
+
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

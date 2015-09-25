@@ -34,28 +34,30 @@
                 var vc = new Tinkerforge.BrickletVoltageCurrent(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
-                        // Get current current and voltage (unit is mA and mV)
-                        vc.getCurrent(
-                            function(current) {
-                                textArea.value += 'Current: '+current/1000+' A\n';
+                    function (connectReason) {
+                        // Get current voltage (unit is mV)
+                        vc.getVoltage(
+                            function (voltage) {
+                                textArea.value += 'Voltage: ' + voltage/1000.0 + ' V\n';
                             },
-                            function(error) {
-                                textArea.value += 'Error: '+error+'\n';
+                            function (error) {
+                                textArea.value += 'Error: ' + error + '\n';
                             }
                         );
-                        vc.getVoltage(
-                            function(voltage) {
-                                textArea.value += 'Voltage: '+voltage/1000+' V\n';
+
+                        // Get current current (unit is mA)
+                        vc.getCurrent(
+                            function (current) {
+                                textArea.value += 'Current: ' + current/1000.0 + ' A\n';
                             },
-                            function(error) {
-                                textArea.value += 'Error: '+error+'\n';
+                            function (error) {
+                                textArea.value += 'Error: ' + error + '\n';
                             }
                         );
                     }

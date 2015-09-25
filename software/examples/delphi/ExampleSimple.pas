@@ -24,7 +24,7 @@ var
   e: TExample;
 
 procedure TExample.Execute;
-var voltage: longint;
+var voltage, current: longint;
 begin
   { Create IP connection }
   ipcon := TIPConnection.Create;
@@ -39,6 +39,10 @@ begin
   { Get current voltage (unit is mV) }
   voltage := vc.GetVoltage;
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
+
+  { Get current current (unit is mA) }
+  current := vc.GetCurrent;
+  WriteLn(Format('Current: %f A', [current/1000.0]));
 
   WriteLn('Press key to exit');
   ReadLn;

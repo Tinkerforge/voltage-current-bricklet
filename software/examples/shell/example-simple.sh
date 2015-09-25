@@ -1,9 +1,10 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
-# get current current and voltage (unit is mA and mV)
-tinkerforge call voltage-current-bricklet $uid get-current
+# Get current voltage (unit is mV)
 tinkerforge call voltage-current-bricklet $uid get-voltage
+
+# Get current current (unit is mA)
+tinkerforge call voltage-current-bricklet $uid get-current

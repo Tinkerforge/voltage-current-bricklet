@@ -2,38 +2,39 @@ var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
-var UID = '555'; // Change to your UID
+var UID = 'XYZ'; // Change to your UID
 
 var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
 var vc = new Tinkerforge.BrickletVoltageCurrent(UID, ipcon); // Create device object
 
 ipcon.connect(HOST, PORT,
-    function(error) {
-        console.log('Error: '+error);
+    function (error) {
+        console.log('Error: ' + error);
     }
 ); // Connect to brickd
 // Don't use device before ipcon is connected
 
 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-    function(connectReason) {
+    function (connectReason) {
         // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
         vc.setDebouncePeriod(10000);
-        // Configure threshold for "greater than 1A" (unit is mA)
-        vc.setCurrentCallbackThreshold('>', 1*1000, 0);
+
+        // Configure threshold for power "greater than 10 W" (unit is mW)
+        vc.setPowerCallbackThreshold('>', 10*1000, 0);
     }
 );
 
-// Register threshold reached callback
-vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT_REACHED,
-    // Callback for current greater than 1A
-    function(current) {
-        console.log('Current is greater than 1A: '+current/1000+' A');
+// Register power reached callback
+vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_POWER_REACHED,
+    // Callback function for power reached callback (parameter has unit mW)
+    function (power) {
+        console.log('Power: ' + power/1000.0 + ' W');
     }
 );
 
-console.log("Press any key to exit ...");
+console.log('Press key to exit');
 process.stdin.on('data',
-    function(data) {
+    function (data) {
         ipcon.disconnect();
         process.exit(0);
     }

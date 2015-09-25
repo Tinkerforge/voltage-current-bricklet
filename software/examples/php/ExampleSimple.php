@@ -8,7 +8,7 @@ use Tinkerforge\BrickletVoltageCurrent;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'ABC'; // Change to your UID
+const UID = 'XYZ'; // Change to your UID
 
 $ipcon = new IPConnection(); // Create IP connection
 $vc = new BrickletVoltageCurrent(UID, $ipcon); // Create device object
@@ -16,12 +16,13 @@ $vc = new BrickletVoltageCurrent(UID, $ipcon); // Create device object
 $ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
-// Get current current and voltage (unit is mA and mV)
-$current = $vc->getCurrent() / 1000.0;
-$voltage = $vc->getVoltage() / 1000.0;
+// Get current voltage (unit is mV)
+$voltage = $vc->getVoltage();
+echo "Voltage: " . $voltage/1000.0 . " V\n";
 
-echo "Current: $current A\n";
-echo "Voltage: $voltage V\n";
+// Get current current (unit is mA)
+$current = $vc->getCurrent();
+echo "Current: " . $current/1000.0 . " A\n";
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));

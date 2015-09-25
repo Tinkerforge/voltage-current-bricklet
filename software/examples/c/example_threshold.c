@@ -7,7 +7,7 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback function for power greater than 10 W (parameter has unit mW)
+// Callback function for power reached callback (parameter has unit mW)
 void cb_power_reached(int32_t power, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
@@ -33,13 +33,13 @@ int main(void) {
 	// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 	voltage_current_set_debounce_period(&vc, 10000);
 
-	// Register threshold reached callback to function cb_power_reached
+	// Register power reached callback to function cb_power_reached
 	voltage_current_register_callback(&vc,
 	                                  VOLTAGE_CURRENT_CALLBACK_POWER_REACHED,
 	                                  (void *)cb_power_reached,
 	                                  NULL);
 
-	// Configure threshold for "greater than 10 W" (unit is mW)
+	// Configure threshold for power "greater than 10 W" (unit is mW)
 	voltage_current_set_power_callback_threshold(&vc, '>', 10*1000, 0);
 
 	printf("Press key to exit\n");

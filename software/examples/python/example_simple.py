@@ -17,7 +17,11 @@ if __name__ == "__main__":
 
     # Get current voltage (unit is mV)
     voltage = vc.get_voltage()
-    print('Voltage: ' + str(voltage/1000.0) + ' V')
+    print("Voltage: " + str(voltage/1000.0) + " V")
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    # Get current current (unit is mA)
+    current = vc.get_current()
+    print("Current: " + str(current/1000.0) + " A")
+
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

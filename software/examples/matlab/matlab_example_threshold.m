@@ -4,8 +4,8 @@ function matlab_example_threshold()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = '555'; % Change to your UID
-    
+    UID = 'XYZ'; % Change to your UID
+
     ipcon = IPConnection(); % Create IP connection
     vc = BrickletVoltageCurrent(UID, ipcon); % Create device object
 
@@ -15,17 +15,17 @@ function matlab_example_threshold()
     % Get threshold callbacks with a debounce time of 10 seconds (10000ms)
     vc.setDebouncePeriod(10000);
 
-    % Register threshold reached callback to function cb_reached
-    set(vc, 'CurrentCallback', @(h, e) cb_reached(e));
+    % Register power reached callback to function cb_power_reached
+    set(vc, 'PowerReachedCallback', @(h, e) cb_power_reached(e));
 
-    % Configure threshold for "greater than 1A" (unit is mA)
-    vc.setCurrentCallbackThreshold('>', 1*1000, 0);
+    % Configure threshold for power "greater than 10 W" (unit is mW)
+    vc.setPowerCallbackThreshold('>', 10*1000, 0);
 
-    input('Press any key to exit...\n', 's');
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end
 
-% Callback for current greater than 1A
-function cb_reached(e)
-    fprintf('Current is greater than 1A: %g \n', e.current/1000.0);
+% Callback function for power reached callback (parameter has unit mW)
+function cb_power_reached(e)
+    fprintf('Power: %g W\n', e.power/1000.0);
 end

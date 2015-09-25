@@ -32,6 +32,15 @@ int main(void) {
 
 	printf("Voltage: %f V\n", voltage/1000.0);
 
+	// Get current current (unit is mA)
+	int32_t current;
+	if(voltage_current_get_current(&vc, &current) < 0) {
+		fprintf(stderr, "Could not get current, probably timeout\n");
+		return 1;
+	}
+
+	printf("Current: %f A\n", current/1000.0);
+
 	printf("Press key to exit\n");
 	getchar();
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally

@@ -42,13 +42,13 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
+  { Register current callback to procedure CurrentCB }
+  vc.OnCurrent := {$ifdef FPC}@{$endif}CurrentCB;
+
   { Set period for current callback to 1s (1000ms)
     Note: The current callback is only called every second
           if the current has changed since the last call! }
   vc.SetCurrentCallbackPeriod(1000);
-
-  { Register current callback to procedure CurrentCB }
-  vc.OnCurrent := {$ifdef FPC}@{$endif}CurrentCB;
 
   WriteLn('Press key to exit');
   ReadLn;

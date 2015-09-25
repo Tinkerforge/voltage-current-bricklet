@@ -24,7 +24,7 @@ const
 var
   e: TExample;
 
-{ Callback procedure for power greater than 10 W (parameter has unit mW) }
+{ Callback procedure for power reached callback (parameter has unit mW) }
 procedure TExample.PowerReachedCB(sender: TBrickletVoltageCurrent; const power: longint);
 begin
   WriteLn(Format('Power: %f W', [power/1000.0]));
@@ -45,10 +45,10 @@ begin
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   vc.SetDebouncePeriod(10000);
 
-  { Register threshold reached callback to procedure PowerReachedCB }
+  { Register power reached callback to procedure PowerReachedCB }
   vc.OnPowerReached := {$ifdef FPC}@{$endif}PowerReachedCB;
 
-  { Configure threshold for "greater than 10 W" (unit is mW) }
+  { Configure threshold for power "greater than 10 W" (unit is mW) }
   vc.SetPowerCallbackThreshold('>', 10*1000, 0);
 
   WriteLn('Press key to exit');

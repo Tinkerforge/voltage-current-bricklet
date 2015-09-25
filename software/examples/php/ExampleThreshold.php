@@ -8,12 +8,12 @@ use Tinkerforge\BrickletVoltageCurrent;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'ABC'; // Change to your UID
+const UID = 'XYZ'; // Change to your UID
 
-// Callback for current greater than 1A
-function cb_reached($current)
+// Callback function for power reached callback (parameter has unit mW)
+function cb_powerReached($power)
 {
-    echo "Current is greater than 1A: " . $current / 1000.0 . "\n";
+    echo "Power: " . $power/1000.0 . " W\n";
 }
 
 $ipcon = new IPConnection(); // Create IP connection
@@ -25,11 +25,11 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 $vc->setDebouncePeriod(10000);
 
-// Register threshold reached callback to function cb_reached
-$vc->registerCallback(BrickletVoltageCurrent::CALLBACK_CURRENT_REACHED, 'cb_reached');
+// Register power reached callback to function cb_powerReached
+$vc->registerCallback(BrickletVoltageCurrent::CALLBACK_POWER_REACHED, 'cb_powerReached');
 
-// Configure threshold for "greater than 1A" (unit is mA)
-$vc->setCurrentCallbackThreshold('>', 1*1000, 0);
+// Configure threshold for power "greater than 10 W" (unit is mW)
+$vc->setPowerCallbackThreshold('>', 10*1000, 0);
 
 echo "Press ctrl+c to exit\n";
 $ipcon->dispatchCallbacks(-1); // Dispatch callbacks forever
