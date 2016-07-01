@@ -4,7 +4,7 @@ Imports Tinkerforge
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Voltage/Current Bricklet
 
     ' Callback subroutine for current callback (parameter has unit mA)
     Sub CurrentCB(ByVal sender As BrickletVoltageCurrent, ByVal current As Integer)

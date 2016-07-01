@@ -8,7 +8,7 @@ use Tinkerforge\BrickletVoltageCurrent;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Voltage/Current Bricklet
 
 // Callback function for power reached callback (parameter has unit mW)
 function cb_powerReached($power)

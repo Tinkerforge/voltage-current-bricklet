@@ -4,7 +4,7 @@ Imports Tinkerforge
 Module ExampleThreshold
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Voltage/Current Bricklet
 
     ' Callback subroutine for power reached callback (parameter has unit mW)
     Sub PowerReachedCB(ByVal sender As BrickletVoltageCurrent, ByVal power As Integer)

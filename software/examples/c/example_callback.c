@@ -5,7 +5,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your Voltage/Current Bricklet
 
 // Callback function for current callback (parameter has unit mA)
 void cb_current(int32_t current, void *user_data) {

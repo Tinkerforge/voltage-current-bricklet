@@ -8,7 +8,7 @@ use Tinkerforge\BrickletVoltageCurrent;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Voltage/Current Bricklet
 
 $ipcon = new IPConnection(); // Create IP connection
 $vc = new BrickletVoltageCurrent(UID, $ipcon); // Create device object
