@@ -25,7 +25,7 @@ class Example
 		vc.SetDebouncePeriod(10000);
 
 		// Register power reached callback to function PowerReachedCB
-		vc.PowerReached += PowerReachedCB;
+		vc.PowerReachedCallback += PowerReachedCB;
 
 		// Configure threshold for power "greater than 10 W" (unit is mW)
 		vc.SetPowerCallbackThreshold('>', 10*1000, 0);

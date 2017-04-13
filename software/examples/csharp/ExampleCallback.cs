@@ -22,7 +22,7 @@ class Example
 		// Don't use device before ipcon is connected
 
 		// Register current callback to function CurrentCB
-		vc.Current += CurrentCB;
+		vc.CurrentCallback += CurrentCB;
 
 		// Set period for current callback to 1s (1000ms)
 		// Note: The current callback is only called every second
