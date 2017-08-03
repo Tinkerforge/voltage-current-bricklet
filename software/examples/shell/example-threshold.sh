@@ -10,7 +10,7 @@ tinkerforge call voltage-current-bricklet $uid set-debounce-period 10000
 tinkerforge dispatch voltage-current-bricklet $uid power-reached &
 
 # Configure threshold for power "greater than 10 W" (unit is mW)
-tinkerforge call voltage-current-bricklet $uid set-power-callback-threshold greater 10000 0
+tinkerforge call voltage-current-bricklet $uid set-power-callback-threshold threshold-option-greater 10000 0
 
 echo "Press key to exit"; read dummy
 
