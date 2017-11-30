@@ -19,7 +19,7 @@ Module ExampleCallback
         ' Don't use device before ipcon is connected
 
         ' Register current callback to subroutine CurrentCB
-        AddHandler vc.Current, AddressOf CurrentCB
+        AddHandler vc.CurrentCallback, AddressOf CurrentCB
 
         ' Set period for current callback to 1s (1000ms)
         ' Note: The current callback is only called every second

@@ -16,7 +16,7 @@ vc@SetDebouncePeriod[10000]
 (*Callback function for power reached callback (parameter has unit mW)*)
 PowerReachedCB[sender_,power_]:=
  Print["Power: "<>ToString[N[Quantity[power,"W/1000"]]]]
-AddEventHandler[vc@PowerReached,PowerReachedCB]
+AddEventHandler[vc@PowerReachedCallback,PowerReachedCB]
 
 (*Configure threshold for power "greater than 10 W" (unit is mW)*)
 option=Tinkerforge`BrickletVoltageCurrent`THRESHOLDUOPTIONUGREATER

@@ -22,7 +22,7 @@ Module ExampleThreshold
         vc.SetDebouncePeriod(10000)
 
         ' Register power reached callback to subroutine PowerReachedCB
-        AddHandler vc.PowerReached, AddressOf PowerReachedCB
+        AddHandler vc.PowerReachedCallback, AddressOf PowerReachedCB
 
         ' Configure threshold for power "greater than 10 W" (unit is mW)
         vc.SetPowerCallbackThreshold(">"C, 10*1000, 0)
