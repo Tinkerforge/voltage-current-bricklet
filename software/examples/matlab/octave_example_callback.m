@@ -23,7 +23,7 @@ function octave_example_callback()
     ipcon.disconnect();
 end
 
-% Callback function for current callback (parameter has unit mA)
+% Callback function for current callback
 function cb_current(e)
     fprintf("Current: %g A\n", e.current/1000.0);
 end

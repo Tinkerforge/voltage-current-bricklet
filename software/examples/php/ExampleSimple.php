@@ -16,11 +16,11 @@ $vc = new BrickletVoltageCurrent(UID, $ipcon); // Create device object
 $ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
-// Get current voltage (unit is mV)
+// Get current voltage
 $voltage = $vc->getVoltage();
 echo "Voltage: " . $voltage/1000.0 . " V\n";
 
-// Get current current (unit is mA)
+// Get current current
 $current = $vc->getCurrent();
 echo "Current: " . $current/1000.0 . " A\n";
 

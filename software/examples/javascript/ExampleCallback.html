@@ -50,7 +50,7 @@
 
                 // Register current callback
                 vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT,
-                    // Callback function for current callback (parameter has unit mA)
+                    // Callback function for current callback
                     function (current) {
                         textArea.value += 'Current: ' + current/1000.0 + ' A\n';
                         textArea.scrollTop = textArea.scrollHeight;

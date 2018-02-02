@@ -10,10 +10,10 @@ ipcon=NETNew["Tinkerforge.IPConnection"]
 vc=NETNew["Tinkerforge.BrickletVoltageCurrent",uid,ipcon]
 ipcon@Connect[host,port]
 
-(*Get current voltage (unit is mV)*)
+(*Get current voltage*)
 Print["Voltage: "<>ToString[N[Quantity[vc@GetVoltage[],"V/1000"]]]]
 
-(*Get current current (unit is mA)*)
+(*Get current current*)
 Print["Current: "<>ToString[N[Quantity[vc@GetCurrent[],"A/1000"]]]]
 
 (*Clean up*)

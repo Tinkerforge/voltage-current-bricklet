@@ -8,7 +8,7 @@ UID = "XYZ" # Change XYZ to the UID of your Voltage/Current Bricklet
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_voltage_current import BrickletVoltageCurrent
 
-# Callback function for current callback (parameter has unit mA)
+# Callback function for current callback
 def cb_current(current):
     print("Current: " + str(current/1000.0) + " A")
 

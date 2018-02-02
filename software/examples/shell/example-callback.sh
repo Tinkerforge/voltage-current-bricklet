@@ -3,7 +3,7 @@
 
 uid=XYZ # Change XYZ to the UID of your Voltage/Current Bricklet
 
-# Handle incoming current callbacks (parameter has unit mA)
+# Handle incoming current callbacks
 tinkerforge dispatch voltage-current-bricklet $uid current &
 
 # Set period for current callback to 1s (1000ms)

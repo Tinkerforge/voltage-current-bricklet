@@ -22,12 +22,12 @@ Notebook[{
    RowBox[{"vc", "@", RowBox[{"SetDebouncePeriod", "[", "10000", "]"}]}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Callback function for power reached callback (parameter has unit mW)", "*)"}],
+   RowBox[{"(*", "Callback function for power reached callback", "*)"}],
    RowBox[{RowBox[{"PowerReachedCB", "[", RowBox[{"sender_", ",", "power_"}], "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Power: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"N", "[", RowBox[{"Quantity", "[", RowBox[{"power", ",", "\"\<W/1000\>\""}], "]"}], "]"}], "]"}]}], "]"}]}],
    RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"vc", "@", "PowerReachedCallback"}], ",", "PowerReachedCB"}], "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Configure threshold for power ", "\"\<greater than 10 W\>\"", " (unit is mW)", "*)"}],
+   RowBox[{"(*", "Configure threshold for power ", "\"\<greater than 10 W\>\"", "", "*)"}],
    RowBox[{"option", "=", "Tinkerforge`BrickletVoltageCurrent`THRESHOLDUOPTIONUGREATER"}],
    RowBox[{"vc", "@", RowBox[{"SetPowerCallbackThreshold", "[", RowBox[{"option", ",", RowBox[{"10", "*", "1000"}], ",", "0"}], "]"}]}],
    RowBox[{"

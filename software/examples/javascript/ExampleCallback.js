@@ -25,7 +25,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
 
 // Register current callback
 vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_CURRENT,
-    // Callback function for current callback (parameter has unit mA)
+    // Callback function for current callback
     function (current) {
         console.log('Current: ' + current/1000.0 + ' A');
     }

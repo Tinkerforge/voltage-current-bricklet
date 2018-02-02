@@ -7,7 +7,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your Voltage/Current Bricklet
 
-	// Callback function for current callback (parameter has unit mA)
+	// Callback function for current callback
 	static void CurrentCB(BrickletVoltageCurrent sender, int current)
 	{
 		Console.WriteLine("Current: " + current/1000.0 + " A");

@@ -7,7 +7,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your Voltage/Current Bricklet
 
-	// Callback function for power reached callback (parameter has unit mW)
+	// Callback function for power reached callback
 	static void PowerReachedCB(BrickletVoltageCurrent sender, int power)
 	{
 		Console.WriteLine("Power: " + power/1000.0 + " W");
@@ -27,7 +27,7 @@ class Example
 		// Register power reached callback to function PowerReachedCB
 		vc.PowerReachedCallback += PowerReachedCB;
 
-		// Configure threshold for power "greater than 10 W" (unit is mW)
+		// Configure threshold for power "greater than 10 W"
 		vc.SetPowerCallbackThreshold('>', 10*1000, 0);
 
 		Console.WriteLine("Press enter to exit");

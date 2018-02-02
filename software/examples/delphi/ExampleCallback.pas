@@ -24,7 +24,7 @@ const
 var
   e: TExample;
 
-{ Callback procedure for current callback (parameter has unit mA) }
+{ Callback procedure for current callback }
 procedure TExample.CurrentCB(sender: TBrickletVoltageCurrent; const current: longint);
 begin
   WriteLn(Format('Current: %f A', [current/1000.0]));

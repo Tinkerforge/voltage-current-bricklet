@@ -20,14 +20,14 @@ public class ExampleThreshold {
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		vc.setDebouncePeriod(10000);
 
-		// Add power reached listener (parameter has unit mW)
+		// Add power reached listener
 		vc.addPowerReachedListener(new BrickletVoltageCurrent.PowerReachedListener() {
 			public void powerReached(int power) {
 				System.out.println("Power: " + power/1000.0 + " W");
 			}
 		});
 
-		// Configure threshold for power "greater than 10 W" (unit is mW)
+		// Configure threshold for power "greater than 10 W"
 		vc.setPowerCallbackThreshold('>', 10*1000, 0);
 
 		System.out.println("Press key to exit"); System.in.read();

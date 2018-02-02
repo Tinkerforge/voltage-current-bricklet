@@ -16,11 +16,11 @@ vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Get current voltage (unit is mV)
+# Get current voltage
 voltage = vc.get_voltage
 puts "Voltage: #{voltage/1000.0} V"
 
-# Get current current (unit is mA)
+# Get current current
 current = vc.get_current
 puts "Current: #{current/1000.0} A"
 

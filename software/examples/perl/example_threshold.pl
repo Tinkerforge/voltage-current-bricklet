@@ -7,7 +7,7 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'XYZ'; # Change XYZ to the UID of your Voltage/Current Bricklet
 
-# Callback subroutine for power reached callback (parameter has unit mW)
+# Callback subroutine for power reached callback
 sub cb_power_reached
 {
     my ($power) = @_;
@@ -27,7 +27,7 @@ $vc->set_debounce_period(10000);
 # Register power reached callback to subroutine cb_power_reached
 $vc->register_callback($vc->CALLBACK_POWER_REACHED, 'cb_power_reached');
 
-# Configure threshold for power "greater than 10 W" (unit is mW)
+# Configure threshold for power "greater than 10 W"
 $vc->set_power_callback_threshold('>', 10*1000, 0);
 
 print "Press key to exit\n";

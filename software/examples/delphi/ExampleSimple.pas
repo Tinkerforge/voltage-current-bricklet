@@ -36,11 +36,11 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Get current voltage (unit is mV) }
+  { Get current voltage }
   voltage := vc.GetVoltage;
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
 
-  { Get current current (unit is mA) }
+  { Get current current }
   current := vc.GetCurrent;
   WriteLn(Format('Current: %f A', [current/1000.0]));
 

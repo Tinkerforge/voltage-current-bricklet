@@ -23,7 +23,7 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Get current voltage (unit is mV)
+	// Get current voltage
 	int32_t voltage;
 	if(voltage_current_get_voltage(&vc, &voltage) < 0) {
 		fprintf(stderr, "Could not get voltage, probably timeout\n");
@@ -32,7 +32,7 @@ int main(void) {
 
 	printf("Voltage: %f V\n", voltage/1000.0);
 
-	// Get current current (unit is mA)
+	// Get current current
 	int32_t current;
 	if(voltage_current_get_current(&vc, &current) < 0) {
 		fprintf(stderr, "Could not get current, probably timeout\n");

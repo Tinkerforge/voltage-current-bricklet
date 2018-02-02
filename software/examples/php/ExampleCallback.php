@@ -10,7 +10,7 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change XYZ to the UID of your Voltage/Current Bricklet
 
-// Callback function for current callback (parameter has unit mA)
+// Callback function for current callback
 function cb_current($current)
 {
     echo "Current: " . $current/1000.0 . " A\n";

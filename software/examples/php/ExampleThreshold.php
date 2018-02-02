@@ -10,7 +10,7 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change XYZ to the UID of your Voltage/Current Bricklet
 
-// Callback function for power reached callback (parameter has unit mW)
+// Callback function for power reached callback
 function cb_powerReached($power)
 {
     echo "Power: " . $power/1000.0 . " W\n";
@@ -28,7 +28,7 @@ $vc->setDebouncePeriod(10000);
 // Register power reached callback to function cb_powerReached
 $vc->registerCallback(BrickletVoltageCurrent::CALLBACK_POWER_REACHED, 'cb_powerReached');
 
-// Configure threshold for power "greater than 10 W" (unit is mW)
+// Configure threshold for power "greater than 10 W"
 $vc->setPowerCallbackThreshold('>', 10*1000, 0);
 
 echo "Press ctrl+c to exit\n";

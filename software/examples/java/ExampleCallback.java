@@ -17,7 +17,7 @@ public class ExampleCallback {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Add current listener (parameter has unit mA)
+		// Add current listener
 		vc.addCurrentListener(new BrickletVoltageCurrent.CurrentListener() {
 			public void current(int current) {
 				System.out.println("Current: " + current/1000.0 + " A");

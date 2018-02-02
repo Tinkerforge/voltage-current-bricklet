@@ -41,7 +41,7 @@
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
                     function (connectReason) {
-                        // Get current voltage (unit is mV)
+                        // Get current voltage
                         vc.getVoltage(
                             function (voltage) {
                                 textArea.value += 'Voltage: ' + voltage/1000.0 + ' V\n';
@@ -51,7 +51,7 @@
                             }
                         );
 
-                        // Get current current (unit is mA)
+                        // Get current current
                         vc.getCurrent(
                             function (current) {
                                 textArea.value += 'Current: ' + current/1000.0 + ' A\n';

@@ -16,7 +16,7 @@ vc = BrickletVoltageCurrent.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register current callback (parameter has unit mA)
+# Register current callback
 vc.register_callback(BrickletVoltageCurrent::CALLBACK_CURRENT) do |current|
   puts "Current: #{current/1000.0} A"
 end

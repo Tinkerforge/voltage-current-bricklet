@@ -8,7 +8,7 @@ UID = "XYZ" # Change XYZ to the UID of your Voltage/Current Bricklet
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_voltage_current import BrickletVoltageCurrent
 
-# Callback function for power reached callback (parameter has unit mW)
+# Callback function for power reached callback
 def cb_power_reached(power):
     print("Power: " + str(power/1000.0) + " W")
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # Register power reached callback to function cb_power_reached
     vc.register_callback(vc.CALLBACK_POWER_REACHED, cb_power_reached)
 
-    # Configure threshold for power "greater than 10 W" (unit is mW)
+    # Configure threshold for power "greater than 10 W"
     vc.set_power_callback_threshold(">", 10*1000, 0)
 
     raw_input("Press key to exit\n") # Use input() in Python 3

@@ -19,12 +19,12 @@ ipcon.connect HOST, PORT # Connect to brickd
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 vc.set_debounce_period 10000
 
-# Register power reached callback (parameter has unit mW)
+# Register power reached callback
 vc.register_callback(BrickletVoltageCurrent::CALLBACK_POWER_REACHED) do |power|
   puts "Power: #{power/1000.0} W"
 end
 
-# Configure threshold for power "greater than 10 W" (unit is mW)
+# Configure threshold for power "greater than 10 W"
 vc.set_power_callback_threshold '>', 10*1000, 0
 
 puts 'Press key to exit'

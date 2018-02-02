@@ -7,7 +7,7 @@
 #define PORT 4223
 #define UID "XYZ" // Change XYZ to the UID of your Voltage/Current Bricklet
 
-// Callback function for power reached callback (parameter has unit mW)
+// Callback function for power reached callback
 void cb_power_reached(int32_t power, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
@@ -39,7 +39,7 @@ int main(void) {
 	                                  (void *)cb_power_reached,
 	                                  NULL);
 
-	// Configure threshold for power "greater than 10 W" (unit is mW)
+	// Configure threshold for power "greater than 10 W"
 	voltage_current_set_power_callback_threshold(&vc, '>', 10*1000, 0);
 
 	printf("Press key to exit\n");

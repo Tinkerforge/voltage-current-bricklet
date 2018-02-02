@@ -19,14 +19,14 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
         // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
         vc.setDebouncePeriod(10000);
 
-        // Configure threshold for power "greater than 10 W" (unit is mW)
+        // Configure threshold for power "greater than 10 W"
         vc.setPowerCallbackThreshold('>', 10*1000, 0);
     }
 );
 
 // Register power reached callback
 vc.on(Tinkerforge.BrickletVoltageCurrent.CALLBACK_POWER_REACHED,
-    // Callback function for power reached callback (parameter has unit mW)
+    // Callback function for power reached callback
     function (power) {
         console.log('Power: ' + power/1000.0 + ' W');
     }

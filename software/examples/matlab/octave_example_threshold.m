@@ -17,14 +17,14 @@ function octave_example_threshold()
     % Register power reached callback to function cb_power_reached
     vc.addPowerReachedCallback(@cb_power_reached);
 
-    % Configure threshold for power "greater than 10 W" (unit is mW)
+    % Configure threshold for power "greater than 10 W"
     vc.setPowerCallbackThreshold(">", 10*1000, 0);
 
     input("Press key to exit\n", "s");
     ipcon.disconnect();
 end
 
-% Callback function for power reached callback (parameter has unit mW)
+% Callback function for power reached callback
 function cb_power_reached(e)
     fprintf("Power: %g W\n", e.power/1000.0);
 end
