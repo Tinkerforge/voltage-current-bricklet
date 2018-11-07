@@ -1,32 +1,33 @@
 use std::{error::Error, io, thread};
-use tinkerforge::{ipconnection::IpConnection, voltage_current_bricklet::*};
+use tinkerforge::{ip_connection::IpConnection, voltage_current_bricklet::*};
 
-const HOST: &str = "127.0.0.1";
+const HOST: &str = "localhost";
 const PORT: u16 = 4223;
-const UID: &str = "XYZ"; // Change XYZ to the UID of your Voltage/Current Bricklet
+const UID: &str = "XYZ"; // Change XYZ to the UID of your Voltage/Current Bricklet.
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let ipcon = IpConnection::new(); // Create IP connection
-    let voltage_current_bricklet = VoltageCurrentBricklet::new(UID, &ipcon); // Create device object
+    let ipcon = IpConnection::new(); // Create IP connection.
+    let vc = VoltageCurrentBricklet::new(UID, &ipcon); // Create device object.
 
-    ipcon.connect(HOST, PORT).recv()??; // Connect to brickd
-                                        // Don't use device before ipcon is connected
+    ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
+                                          // Don't use device before ipcon is connected.
 
-    // Get threshold listeners with a debounce time of 10 seconds (10000ms)
-    voltage_current_bricklet.set_debounce_period(10000);
+    // Get threshold receivers with a debounce time of 10 seconds (10000ms).
+    vc.set_debounce_period(10000);
 
-    //Create listener for power reached events.
-    let power_reached_listener = voltage_current_bricklet.get_power_reached_receiver();
-    // Spawn thread to handle received events. This thread ends when the voltage_current_bricklet
+    // Create receiver for power reached events.
+    let power_reached_receiver = vc.get_power_reached_receiver();
+
+    // Spawn thread to handle received events. This thread ends when the `vc` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
-        for event in power_reached_listener {
-            println!("Power: {}{}", event as f32 / 1000.0, " W");
+        for power_reached in power_reached_receiver {
+            println!("Power: {} W", power_reached as f32 / 1000.0);
         }
     });
 
-    // Configure threshold for power "greater than 10 W"
-    voltage_current_bricklet.set_power_callback_threshold('>', 10 * 1000, 0);
+    // Configure threshold for power "greater than 10 W".
+    vc.set_power_callback_threshold('>', 10 * 1000, 0);
 
     println!("Press enter to exit.");
     let mut _input = String::new();
