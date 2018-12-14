@@ -19,7 +19,7 @@ func main() {
 	// Don't use device before ipcon is connected.
 
 	vc.RegisterCurrentCallback(func(current int32) {
-		fmt.Printf("Current: %d A\n", float64(current)/1000.0)
+		fmt.Printf("Current: %f A\n", float64(current)/1000.0)
 	})
 
 	// Set period for current receiver to 1s (1000ms).

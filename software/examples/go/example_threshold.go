@@ -22,7 +22,7 @@ func main() {
 	vc.SetDebouncePeriod(10000)
 
 	vc.RegisterPowerReachedCallback(func(power int32) {
-		fmt.Printf("Power: %d W\n", float64(power)/1000.0)
+		fmt.Printf("Power: %f W\n", float64(power)/1000.0)
 	})
 
 	// Configure threshold for power "greater than 10 W".
