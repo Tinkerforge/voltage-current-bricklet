@@ -1,0 +1,12 @@
+
+
+# Change XYZ to the UID of your Voltage/Current Bricklet
+
+setup:
+	# Get threshold callbacks with a debounce time of 10 seconds (10000ms)
+	publish '{"debounce": 10000}' to tinkerforge/request/voltage-current_bricklet/XYZ/set_debounce_period
+	# Handle incoming power reached callbacks
+	subscribe to tinkerforge/callback/voltage_current_bricklet/XYZ/power_reached
+	publish '{"register": true}' to tinkerforge/register/voltage_current_bricklet/XYZ/power_reached # Register power_reached callback
+	# Configure threshold for power "greater than 10 W"
+	publish '{"option": "greater", "min_power": 10000, "max_power": 0}' to tinkerforge/request/voltage_current_bricklet/XYZ/set_power_callback_threshold

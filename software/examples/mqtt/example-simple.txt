@@ -1,0 +1,11 @@
+
+
+# Change XYZ to the UID of your Voltage/Current Bricklet
+
+setup:
+	# Get current voltage
+	subscribe to tinkerforge/response/voltage_current/XYZ/get_voltage
+	publish '' to tinkerforge/request/voltage_current_bricklet/XYZ/get_voltage 
+	# Get current current
+	subscribe to tinkerforge/response/voltage_current/XYZ/get_current
+	publish '' to tinkerforge/request/voltage_current_bricklet/XYZ/get_current 
