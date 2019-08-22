@@ -36,7 +36,7 @@ int main(void) {
 	// Register power reached callback to function cb_power_reached
 	voltage_current_register_callback(&vc,
 	                                  VOLTAGE_CURRENT_CALLBACK_POWER_REACHED,
-	                                  (void *)cb_power_reached,
+	                                  (void (*)(void))cb_power_reached,
 	                                  NULL);
 
 	// Configure threshold for power "greater than 10 W"
