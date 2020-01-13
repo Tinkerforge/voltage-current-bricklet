@@ -27,5 +27,5 @@ if __name__ == "__main__":
     #       if the current has changed since the last call!
     vc.set_current_callback_period(1000)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
