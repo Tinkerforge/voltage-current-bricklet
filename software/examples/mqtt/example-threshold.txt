@@ -2,7 +2,7 @@
 
 setup:
 	# Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-	publish '{"debounce": 10000}' to tinkerforge/request/voltage-current_bricklet/XYZ/set_debounce_period
+	publish '{"debounce": 10000}' to tinkerforge/request/voltage_current_bricklet/XYZ/set_debounce_period
 
 	# Handle incoming power reached callbacks
 	subscribe to tinkerforge/callback/voltage_current_bricklet/XYZ/power_reached
